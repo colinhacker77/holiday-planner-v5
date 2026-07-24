@@ -1,4 +1,4 @@
-# Holiday Planner v5
+# Holiday Planner v5.1
 
 A complete Netlify-hosted shared holiday planner for a new GitHub repository.
 
@@ -35,3 +35,12 @@ npm run dev
 ```
 
 Use Node.js 18 or later. Local data is sandboxed by Netlify Dev.
+
+
+## v5.1 changes
+
+- Calendar drag-and-drop and arrow moves now update the dates used by every itinerary view, so the itinerary overview, breakdown, map and AI context all follow the same order.
+- Costs accept two decimal places.
+- Every attraction, accommodation and transport cost can be stored as GBP or EUR. Existing entries default to GBP.
+- The overview and budget show separate GBP and EUR totals plus an estimated total in sterling.
+- EUR conversion uses the latest available EUR/GBP rate from the Frankfurter exchange-rate API, cached for six hours. No additional API key is required.
