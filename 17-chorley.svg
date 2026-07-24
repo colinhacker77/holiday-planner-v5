@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Home to Chorley">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#18374a"/><stop offset="1" stop-color="#28786f"/></linearGradient></defs>
+<rect width="1200" height="675" fill="url(#g)"/><circle cx="1020" cy="120" r="190" fill="#d69532" opacity=".22"/><circle cx="110" cy="610" r="260" fill="#fff" opacity=".07"/>
+<g transform="translate(0,60)" stroke="#f4f1e9" stroke-width="18" stroke-linejoin="round" stroke-linecap="round" fill="none" opacity=".9"><path d="M250 430V280l350-210 350 210v150z"/><path d="M520 430V310h160v120" fill="none"/></g>
+<rect x="70" y="505" width="1060" height="120" rx="24" fill="#0c2433" opacity=".78"/>
+<text x="110" y="560" font-family="Arial, sans-serif" font-size="45" font-weight="700" fill="white">Home to Chorley</text>
+<text x="110" y="600" font-family="Arial, sans-serif" font-size="24" fill="#f3ce87">The final drive north</text></svg>
