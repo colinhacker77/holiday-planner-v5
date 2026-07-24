@@ -247,6 +247,22 @@ export default async (req: Request, context: Context) => {
     if (path === "logout" && method === "POST") return json({ ok: true }, 200, { "set-cookie": sessionCookie("", 0) });
     if (!user) return json({ error: "Authentication required." }, 401);
 
+    if (path === "currency-rate" && method === "GET") {
+      const cacheKey = "currency-EUR-GBP";
+      const cached: any = await geoStore().get(cacheKey, { type: "json" });
+      if (cached?.rate && cached?.fetchedAt && Date.now() - Date.parse(cached.fetchedAt) < 6 * 60 * 60 * 1000) return json(cached);
+      try {
+        const response = await fetch("https://api.frankfurter.dev/v2/rate/EUR/GBP", { headers: { accept: "application/json" } });
+        const payload: any = await response.json().catch(() => ({}));
+        if (!response.ok || !Number.isFinite(Number(payload.rate))) throw new Error("Invalid exchange-rate response");
+        const result = { base: "EUR", quote: "GBP", rate: Number(payload.rate), date: String(payload.date || ""), fetchedAt: new Date().toISOString(), source: "Frankfurter" };
+        await geoStore().setJSON(cacheKey, result);
+        return json(result);
+      } catch {
+        if (cached?.rate) return json({ ...cached, stale: true });
+        return json({ error: "The EUR to GBP exchange rate is temporarily unavailable." }, 503);
+      }
+    }
     if (path === "data" && method === "GET") return json({ data: (await dataStore().get(DATA_KEY, { type: "json" })) || {}, storage: "netlify-blobs" });
     if (path === "data" && method === "PUT") {
       const denied = requireAdmin(user); if (denied) return denied;
